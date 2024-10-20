@@ -9,7 +9,7 @@
 В этой лабе будем создавать хорошие и плохие докер файлы
 
 Плохое:
-# Плохой Dockerfile
+ Плохой Dockerfile
 FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y \
