@@ -2,7 +2,7 @@
    sudo apt update
 sudo apt install nginx
 
-Сформируем новый или измените существующий конфигурационный файл для своего сайта. К примеру, можно создать файл /etc/nginx/sites-available/example.com.conf:
+Сформируем новый или изменим существующий конфигурационный файл для своего сайта. К примеру, можно создать файл /etc/nginx/sites-available/example.com.conf:
 server {
     listen 80;
     server_name example.com www.example.com;
@@ -32,11 +32,10 @@ server {
 
     
     location /images/ {
-        alias /var/www/example.com/images/; # Путь к папке с изображениями
-    }
+        alias /var/www/example.com/images/; 
 
     location /files/ {
-        alias /var/www/example.com/files/; # Путь к папке с файлами
+        alias /var/www/example.com/files/; 
     }
 
     
