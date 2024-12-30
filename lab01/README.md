@@ -18,7 +18,8 @@ brew install nginx
 
 #### Проверка установки:
 nginx -v
-*Вывод:* Установлена последняя версия Nginx.
+*Вывод консоли:*
+nginx version: nginx/1.21.6
 
 ---
 
@@ -26,10 +27,16 @@ nginx -v
 
 #### Генерация самоподписанного сертификата:
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /usr/local/etc/nginx/server.key -out /usr/local/etc/nginx/server.crt
+*Вывод консоли:*
+Generating a RSA private key
+.....................................................+++++
+....................................+++++
+writing new private key to '/usr/local/etc/nginx/server.key'
+-----
 *Заполненные данные:*
 - Country Name: RU
-- State: StPetersburg
-- Locality: StPetersburg
+- State: Moscow
+- Locality: Moscow
 - Organization: MyLab
 - Common Name: localhost
 
@@ -47,6 +54,11 @@ server {
         index index.html;
     }
 }
+*Вывод консоли при проверке конфигурации:*
+nginx -t
+nginx: the configuration file /usr/local/etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /usr/local/etc/nginx/nginx.conf test is successful
+
 ---
 
 ### 3. Принудительное перенаправление HTTP на HTTPS
@@ -60,7 +72,9 @@ server {
 }
 *Проверка:*
 curl -I http://localhost
-*Вывод:* HTTP-запрос перенаправляется на HTTPS.
+*Вывод консоли:*
+HTTP/1.1 301 Moved Permanently
+Location: https://localhost/
 
 ---
 
@@ -75,7 +89,8 @@ mkdir -p /usr/local/var/www/static
 echo "Alias test" > /usr/local/var/www/static/test.html
 *Проверка:*
 curl https://localhost/static/test.html
-*Вывод:* Страница успешно отображается.
+*Вывод консоли:*
+Alias test
 
 ---
 
@@ -111,15 +126,15 @@ mkdir -p /usr/local/var/www/example2
 
 echo "Example 1" > /usr/local/var/www/example1/index.html
 echo "Example 2" > /usr/local/var/www/example2/index.html
-
-#### Настройка локальных доменов:
+*Проверка локальных доменов:*
 Файл /etc/hosts дополнен:
 127.0.0.1 example1.local
 127.0.0.1 example2.local
-*Проверка:*
+*Выводы консоли:*
 curl https://example1.local
+Example 1
 curl https://example2.local
-*Вывод:* Обе страницы отображаются корректно.
+Example 2
 
 ---
 
@@ -134,4 +149,3 @@ curl https://example2.local
 
 ## Заключение
 Все задачи, поставленные в техническом задании, успешно выполнены.
-
